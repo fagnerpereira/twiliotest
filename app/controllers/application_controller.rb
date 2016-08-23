@@ -5,18 +5,18 @@ class ApplicationController < ActionController::Base
 
   def voice_body
     xml = Twilio::TwiML::Response.new do |r|
-      r.say 'Olá, insira o código a seguir na tela de assinatura. O código de 6 letras é:', voice: 'woman', language: 'pt-BR'
+      r.Say 'Olá, insira o código a seguir na tela de assinatura. O código de 6 letras é:', voice: 'woman', language: 'pt-BR'
 
       2.times.each do |n|
         params[:token].upcase.each_char do |letter|
-          r.say phrase[letter], voice: 'woman', language: 'pt-BR'
+          r.Say phrase[letter], voice: 'woman', language: 'pt-BR'
         end
 
-        r.pause
+        r.Pause
 
         break if n == 1
 
-        r.say 'Repetindo', voice: 'woman', language: 'pt-BR'
+        r.Say 'Repetindo', voice: 'woman', language: 'pt-BR'
       end
     end.text
 
